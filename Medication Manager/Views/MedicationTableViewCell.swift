@@ -19,4 +19,11 @@ class MedicationTableViewCell: UITableViewCell {
     }
     
     
+    func configure(with medication: Medication){
+        nameLabel.text = medication.name
+        timeLabel.text = DateFormatter.medicationTime.string(from: medication.timeOfDay ?? Date())
+    }
+    
+    
+    
 }
