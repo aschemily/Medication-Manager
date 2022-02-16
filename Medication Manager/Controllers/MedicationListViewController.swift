@@ -12,12 +12,24 @@ class MedicationListViewController: UIViewController {
     
     @IBOutlet weak var moodSurveyButton: UIButton!
     
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         MedicationController.shared.fetchMedications()
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reminderFired),
+                                               name: NSNotification.Name(Strings.medicationReminderReceived),
+                                               object: nil)
+        
+        
         guard let survey = MoodSurveyController.shared.fetchSurveys() else {return}
         
         moodSurveyButton.setTitle(survey.mentalState, for: .normal)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -26,14 +38,14 @@ class MedicationListViewController: UIViewController {
         tableView.reloadData()
     }
     
-    @IBAction func addButtonTapped(_ sender: Any) {
-        
-    }
+//    @IBAction func addButtonTapped(_ sender: Any) {
+//
+//    }
     
     
     @IBAction func surveyButtonTapped(_ sender: Any) {
         print("survey tapped")
-        guard let moodSurveyViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "moodSurveyViewController") as? MoodSurveyViewController else {return}
+        guard let moodSurveyViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: Strings.moodSurveyViewControllerIdentifier) as? MoodSurveyViewController else {return}
         
         
         moodSurveyViewController.delegate = self
@@ -42,12 +54,21 @@ class MedicationListViewController: UIViewController {
     
  
     // MARK: - Navigation
+    
+   @objc private func reminderFired(){
+       print("\(#file) received the memo!🛎")
+       view.backgroundColor = .systemRed
+       
+       DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+           self.view.backgroundColor = nil
+       }
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
       //IIDOO
         //Identifier 
-        if segue.identifier == "cellToMedicationDetails",
+        if segue.identifier == Strings.medicationDetailSegueIdenfitier,
            let indexPath = tableView.indexPathForSelectedRow,
            let destination = segue.destination as? MedicationDetailViewController{
             let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
@@ -85,6 +106,14 @@ extension MedicationListViewController: UITableViewDataSource {
             return "Taken"
         }else{
             return nil
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
+            MedicationController.shared.deleteMedication(medication)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
     

@@ -11,6 +11,8 @@
 		32E1C1DA27BC4B3700157C0F /* MoodSurveyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1C1D927BC4B3700157C0F /* MoodSurveyViewController.swift */; };
 		32E1C1DC27BC507000157C0F /* MoodSurvey+convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1C1DB27BC507000157C0F /* MoodSurvey+convenience.swift */; };
 		32E1C1DE27BC511700157C0F /* MoodSurveyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1C1DD27BC511700157C0F /* MoodSurveyController.swift */; };
+		32E1C1E027BD3F0100157C0F /* NotificationScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1C1DF27BD3F0100157C0F /* NotificationScheduler.swift */; };
+		32E1C1E227BD78C900157C0F /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32E1C1E127BD78C900157C0F /* Strings.swift */; };
 		32FF7E5C27BAB7050051858F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF7E5B27BAB7050051858F /* AppDelegate.swift */; };
 		32FF7E5E27BAB7050051858F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32FF7E5D27BAB7050051858F /* SceneDelegate.swift */; };
 		32FF7E6327BAB7050051858F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 32FF7E6127BAB7050051858F /* Main.storyboard */; };
@@ -31,6 +33,8 @@
 		32E1C1D927BC4B3700157C0F /* MoodSurveyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodSurveyViewController.swift; sourceTree = "<group>"; };
 		32E1C1DB27BC507000157C0F /* MoodSurvey+convenience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoodSurvey+convenience.swift"; sourceTree = "<group>"; };
 		32E1C1DD27BC511700157C0F /* MoodSurveyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoodSurveyController.swift; sourceTree = "<group>"; };
+		32E1C1DF27BD3F0100157C0F /* NotificationScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationScheduler.swift; sourceTree = "<group>"; };
+		32E1C1E127BD78C900157C0F /* Strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		32FF7E5827BAB7050051858F /* Medication Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Medication Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		32FF7E5B27BAB7050051858F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		32FF7E5D27BAB7050051858F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +99,8 @@
 				32FF7E6727BAB7060051858F /* Assets.xcassets */,
 				32FF7E6C27BAB7060051858F /* Info.plist */,
 				32FF7E8527BAEDBB0051858F /* DateFormatter+Extras.swift */,
+				32E1C1DF27BD3F0100157C0F /* NotificationScheduler.swift */,
+				32E1C1E127BD78C900157C0F /* Strings.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -221,11 +227,13 @@
 			files = (
 				32E1C1DE27BC511700157C0F /* MoodSurveyController.swift in Sources */,
 				32E1C1DC27BC507000157C0F /* MoodSurvey+convenience.swift in Sources */,
+				32E1C1E227BD78C900157C0F /* Strings.swift in Sources */,
 				32FF7E7927BAC3F80051858F /* MedicationDetailViewController.swift in Sources */,
 				32FF7E5C27BAB7050051858F /* AppDelegate.swift in Sources */,
 				32FF7E7327BAC38F0051858F /* MedicationListViewController.swift in Sources */,
 				32FF7E6627BAB7050051858F /* Medication_Manager.xcdatamodeld in Sources */,
 				32FF7E7F27BAC8B10051858F /* MedicationController.swift in Sources */,
+				32E1C1E027BD3F0100157C0F /* NotificationScheduler.swift in Sources */,
 				32E1C1D827BC0D6200157C0F /* TakenDate+convenience.swift in Sources */,
 				32FF7E7C27BAC5A70051858F /* MedicationTableViewCell.swift in Sources */,
 				32FF7E8427BAD1200051858F /* Medication+convenience.swift in Sources */,

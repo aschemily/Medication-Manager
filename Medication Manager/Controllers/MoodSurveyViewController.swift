@@ -14,6 +14,15 @@ protocol MoodSurveyControllerDelegate: AnyObject{
 class MoodSurveyViewController: UIViewController {
     
     weak var delegate: MoodSurveyControllerDelegate?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reminderFired),
+                                               name: NSNotification.Name(Strings.medicationReminderReceived),
+                                               object: nil)
+    }
 
     @IBAction func emojiTapped(_ sender: UIButton) {
         print("emoji tapped")
@@ -26,5 +35,12 @@ class MoodSurveyViewController: UIViewController {
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @objc private func reminderFired(){
+        print("\(#file) received the memo!🛎 in detail vc")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            self.view.backgroundColor = nil
+        }
+     }
     
 }//end of class

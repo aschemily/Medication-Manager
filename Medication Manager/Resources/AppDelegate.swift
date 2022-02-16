@@ -12,10 +12,37 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { authorized, error in
+            if let error = error{
+                print("error in app delegate launch options, requesting permission to show local notifications \(error)")
+            }
+            if authorized{
+                UNUserNotificationCenter.current().delegate = self
+                self.setNotificationCategories()
+                print("✅user granted access")
+            }else{
+                print("❌user denied access")
+            }
+        }
+        
         return true
+    }
+    
+    private func setNotificationCategories(){
+        let markTakenAction = UNNotificationAction(identifier: Strings.markTakenActionIdentifier, title: Strings.markAsTakenButtonTitle, options: UNNotificationActionOptions(rawValue: 0))
+        
+        let ignoreAction = UNNotificationAction(identifier: Strings.ignoreActionIdentifier, title: Strings.ignoreActionTitle, options: UNNotificationActionOptions(rawValue: 0))
+        
+        let category = UNNotificationCategory(identifier: Strings.notificationCategoryIdefinitier,
+                                              actions: [markTakenAction, ignoreAction],
+                                              intentIdentifiers: [],
+                                              hiddenPreviewsBodyPlaceholder: "",
+                                              categorySummaryFormat: nil,
+                                              options: .customDismissAction)
+        
+        UNUserNotificationCenter.current().setNotificationCategories([category])
     }
 
     // MARK: UISceneSession Lifecycle
@@ -77,6 +104,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        }
 //    }
 //
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name(Strings.medicationReminderReceived), object: self)
+        completionHandler([.sound, .badge, .banner])
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.actionIdentifier == Strings.markTakenActionIdentifier, let id = response.notification.request.content.userInfo[Strings.medicationID] as? String{
+         //   MedicationController.shared.markMedicationTaken(medication: Medication, wasTaken: <#T##Bool#>)
+            MedicationController.shared.markMedicationTaken(withID: id)
+            completionHandler()
+        }
+    }
+    
 }
 
 

@@ -15,6 +15,11 @@ class MedicationDetailViewController: UIViewController {
     
     var medication: Medication?
     
+    deinit{
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,6 +31,11 @@ class MedicationDetailViewController: UIViewController {
         }else {
             title = "Add Medication"
         }
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(reminderFired),
+                                               name: NSNotification.Name(Strings.medicationReminderReceived),
+                                               object: nil)
         
     }
     
@@ -44,4 +54,14 @@ class MedicationDetailViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
-}
+    @objc private func reminderFired(){
+        print("\(#file) received the memo!🛎 in detail vc")
+        view.backgroundColor = .systemPink
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0){
+            self.view.backgroundColor = nil
+        }
+     }
+
+    
+}//end of class
