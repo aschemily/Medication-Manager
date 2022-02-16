@@ -3,11 +3,106 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Mood Survey View Controller-->
+        <scene sceneID="L4E-JM-v5B">
+            <objects>
+                <viewController storyboardIdentifier="moodSurveyViewController" id="4U6-1s-tYd" customClass="MoodSurveyViewController" customModule="Medication_Manager" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dGc-CF-Opi">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dc-Vk-z4L">
+                                <rect key="frame" x="50" y="94" width="45" height="31"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="xmark.octagon" catalog="system">
+                                    <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="4U6-1s-tYd" eventType="touchUpInside" id="Sku-8s-2ul"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today I am feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j9t-3h-Clb">
+                                <rect key="frame" x="123.5" y="225" width="167.5" height="30"/>
+                                <fontDescription key="fontDescription" name="KohinoorGujarati-Regular" family="Kohinoor Gujarati" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="41" translatesAutoresizingMaskIntoConstraints="NO" id="kyq-CU-Zuu">
+                                <rect key="frame" x="167" y="305" width="80" height="322"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UNX-uC-4rW">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="80" id="97q-By-u0h"/>
+                                            <constraint firstAttribute="width" secondItem="UNX-uC-4rW" secondAttribute="height" multiplier="1:1" id="svX-fG-RHH"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="😃">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="emojiTapped:" destination="4U6-1s-tYd" eventType="touchUpInside" id="E4d-wJ-QJ4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fgf-1V-gNm">
+                                        <rect key="frame" x="0.0" y="121" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="fgf-1V-gNm" secondAttribute="height" multiplier="1:1" id="OV6-i6-Leb"/>
+                                            <constraint firstAttribute="height" constant="80" id="r6U-a2-xNh"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="😏">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="emojiTapped:" destination="4U6-1s-tYd" eventType="touchUpInside" id="xxZ-mz-Ed5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ATr-dZ-otJ">
+                                        <rect key="frame" x="0.0" y="242" width="80" height="80"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ATr-dZ-otJ" secondAttribute="height" multiplier="1:1" id="VWS-2q-Bfa"/>
+                                            <constraint firstAttribute="height" constant="80" id="Xwm-Vg-d2p"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="☹️">
+                                            <fontDescription key="titleFontDescription" type="system" pointSize="60"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="emojiTapped:" destination="4U6-1s-tYd" eventType="touchUpInside" id="CNG-8V-kUg"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fgf-1V-gNm" firstAttribute="width" secondItem="fgf-1V-gNm" secondAttribute="height" multiplier="1:1" id="Sal-U7-Cqa"/>
+                                    <constraint firstItem="ATr-dZ-otJ" firstAttribute="width" secondItem="ATr-dZ-otJ" secondAttribute="height" multiplier="1:1" id="THQ-ia-WsN"/>
+                                    <constraint firstItem="ATr-dZ-otJ" firstAttribute="width" secondItem="ATr-dZ-otJ" secondAttribute="height" multiplier="1:1" id="ZtL-aa-UNZ"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="0gE-Nd-riH"/>
+                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                        <constraints>
+                            <constraint firstItem="2dc-Vk-z4L" firstAttribute="top" secondItem="0gE-Nd-riH" secondAttribute="top" constant="50" id="WZD-cT-4Zt"/>
+                            <constraint firstItem="2dc-Vk-z4L" firstAttribute="leading" secondItem="0gE-Nd-riH" secondAttribute="leading" constant="50" id="Zv5-gk-aiF"/>
+                            <constraint firstItem="j9t-3h-Clb" firstAttribute="centerX" secondItem="0gE-Nd-riH" secondAttribute="centerX" id="hQl-a5-f06"/>
+                            <constraint firstItem="kyq-CU-Zuu" firstAttribute="top" secondItem="j9t-3h-Clb" secondAttribute="bottom" constant="50" id="igd-Sk-QhX"/>
+                            <constraint firstItem="kyq-CU-Zuu" firstAttribute="centerX" secondItem="0gE-Nd-riH" secondAttribute="centerX" id="p14-bc-Eoa"/>
+                            <constraint firstItem="j9t-3h-Clb" firstAttribute="top" secondItem="2dc-Vk-z4L" secondAttribute="bottom" constant="100" id="xBS-cn-CQv"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OYF-3j-3lM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="657" y="-615"/>
+        </scene>
         <!--Medication List View Controller-->
         <scene sceneID="Aw0-Ny-eua">
             <objects>
@@ -16,8 +111,40 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1xV-5X-3AB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Today I am feeling:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d54-qY-SEB">
+                                        <rect key="frame" x="16" y="12" width="322" height="36"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypD-Gc-8eQ">
+                                        <rect key="frame" x="354" y="8" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="ypD-Gc-8eQ" secondAttribute="height" multiplier="1:1" id="m68-wp-9cw"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="🙂"/>
+                                        <connections>
+                                            <action selector="surveyButtonTapped:" destination="wyf-96-hd2" eventType="touchUpInside" id="7y2-ZR-zob"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.88868769273911807" blue="0.69440548507726207" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="d54-qY-SEB" secondAttribute="bottom" constant="12" id="Gwc-7d-Fma"/>
+                                    <constraint firstAttribute="bottom" secondItem="ypD-Gc-8eQ" secondAttribute="bottom" constant="8" id="MBQ-a7-gv8"/>
+                                    <constraint firstItem="d54-qY-SEB" firstAttribute="leading" secondItem="1xV-5X-3AB" secondAttribute="leading" constant="16" id="SsR-cR-Jx5"/>
+                                    <constraint firstItem="d54-qY-SEB" firstAttribute="top" secondItem="1xV-5X-3AB" secondAttribute="top" constant="12" id="Y7f-hO-7cO"/>
+                                    <constraint firstAttribute="trailing" secondItem="ypD-Gc-8eQ" secondAttribute="trailing" constant="16" id="YQu-Xt-oIs"/>
+                                    <constraint firstItem="ypD-Gc-8eQ" firstAttribute="leading" secondItem="d54-qY-SEB" secondAttribute="trailing" constant="16" id="jEk-jp-nFg"/>
+                                    <constraint firstItem="ypD-Gc-8eQ" firstAttribute="top" secondItem="1xV-5X-3AB" secondAttribute="top" constant="8" id="rRJ-Wh-zzx"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="NQo-kb-di5">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="148" width="414" height="714"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="medicationCell" rowHeight="85" id="D3g-ZU-Sr1" customClass="MedicationTableViewCell" customModule="Medication_Manager" customModuleProvider="target">
@@ -39,7 +166,8 @@
                                                         <constraint firstAttribute="width" secondItem="yTU-ks-2tK" secondAttribute="height" multiplier="1:1" id="XEO-vw-y1g"/>
                                                     </constraints>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="square" catalog="system">
+                                                    <buttonConfiguration key="configuration" style="plain">
+                                                        <imageReference key="image" image="square" catalog="system" symbolScale="large"/>
                                                         <preferredSymbolConfiguration key="preferredSymbolConfigurationForImage" scale="large"/>
                                                     </buttonConfiguration>
                                                     <connections>
@@ -84,10 +212,13 @@
                         <viewLayoutGuide key="safeArea" id="OUx-7C-UXC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="NQo-kb-di5" firstAttribute="top" secondItem="OUx-7C-UXC" secondAttribute="top" id="Hx5-yH-OYn"/>
+                            <constraint firstItem="NQo-kb-di5" firstAttribute="top" secondItem="1xV-5X-3AB" secondAttribute="bottom" id="Hx5-yH-OYn"/>
                             <constraint firstItem="OUx-7C-UXC" firstAttribute="trailing" secondItem="NQo-kb-di5" secondAttribute="trailing" id="WLG-YU-0S0"/>
+                            <constraint firstItem="1xV-5X-3AB" firstAttribute="leading" secondItem="OUx-7C-UXC" secondAttribute="leading" id="a4N-tN-jVW"/>
+                            <constraint firstItem="1xV-5X-3AB" firstAttribute="top" secondItem="OUx-7C-UXC" secondAttribute="top" id="iSv-gv-hqS"/>
                             <constraint firstItem="NQo-kb-di5" firstAttribute="leading" secondItem="OUx-7C-UXC" secondAttribute="leading" id="jh7-BQ-zRF"/>
                             <constraint firstItem="OUx-7C-UXC" firstAttribute="bottom" secondItem="NQo-kb-di5" secondAttribute="bottom" id="qWS-d6-qmw"/>
+                            <constraint firstItem="OUx-7C-UXC" firstAttribute="trailing" secondItem="1xV-5X-3AB" secondAttribute="trailing" id="uKh-Ti-j33"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DIc-La-yxJ">
@@ -99,6 +230,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="moodSurveyButton" destination="ypD-Gc-8eQ" id="YVm-rI-pnP"/>
                         <outlet property="tableView" destination="NQo-kb-di5" id="jrU-mC-nyf"/>
                     </connections>
                 </viewController>
@@ -188,8 +320,15 @@
     </inferredMetricsTieBreakers>
     <resources>
         <image name="square" catalog="system" width="128" height="114"/>
+        <image name="xmark.octagon" catalog="system" width="128" height="112"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

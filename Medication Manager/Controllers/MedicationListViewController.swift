@@ -10,9 +10,14 @@ import UIKit
 class MedicationListViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    @IBOutlet weak var moodSurveyButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         MedicationController.shared.fetchMedications()
+        guard let survey = MoodSurveyController.shared.fetchSurveys() else {return}
+        
+        moodSurveyButton.setTitle(survey.mentalState, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -25,6 +30,16 @@ class MedicationListViewController: UIViewController {
         
     }
     
+    
+    @IBAction func surveyButtonTapped(_ sender: Any) {
+        print("survey tapped")
+        guard let moodSurveyViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "moodSurveyViewController") as? MoodSurveyViewController else {return}
+        
+        
+        moodSurveyViewController.delegate = self
+        navigationController?.present(moodSurveyViewController, animated: true, completion: nil)
+    }
+    
  
     // MARK: - Navigation
 
@@ -35,7 +50,7 @@ class MedicationListViewController: UIViewController {
         if segue.identifier == "cellToMedicationDetails",
            let indexPath = tableView.indexPathForSelectedRow,
            let destination = segue.destination as? MedicationDetailViewController{
-           let medication = MedicationController.shared.medications[indexPath.row]
+            let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
             destination.medication = medication
         }
     }
@@ -44,22 +59,58 @@ class MedicationListViewController: UIViewController {
 }// end of class
 
 extension MedicationListViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return MedicationController.shared.sections.count
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return MedicationController.shared.medications.count
+        return MedicationController.shared.sections[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "medicationCell", for: indexPath) as? MedicationTableViewCell else {return UITableViewCell()}
         
-        let medication = MedicationController.shared.medications[indexPath.row]
+        let medication = MedicationController.shared.sections[indexPath.section][indexPath.row]
         
         cell.configure(with: medication)
-    
+        cell.delegate = self
         return cell
                 
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0{
+            return "Not Taken"
+        }else if section == 1{
+            return "Taken"
+        }else{
+            return nil
+        }
+    }
     
-}
+    
+    
+}//end of extension
 
 extension MedicationListViewController: UITableViewDelegate{}
+
+extension MedicationListViewController: MedicationTableViewCellDelegate{
+  
+    
+    func medicationWasTakenButtonTapped(medication: Medication, wasTaken: Bool) {
+      //  print("med was taken")
+        MedicationController.shared.markMedicationTaken(medication: medication, wasTaken: wasTaken)
+        tableView.reloadData()
+    }
+    
+    
+}// end of extension
+
+extension MedicationListViewController: MoodSurveyControllerDelegate{
+    func moodButtonTapped(with emoji: String) {
+        MoodSurveyController.shared.didTapMoodEmoji(emoji)
+        moodSurveyButton.setTitle(emoji, for: .normal)
+    }
+    
+    
+}
